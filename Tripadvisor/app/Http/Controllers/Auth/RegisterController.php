@@ -50,7 +50,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'abo_pseudo' => 'required',/*|string|max:255',*/
-            'abo_mel' => 'required',/*|string|abo_mel|max:255|unique:users',*/
+            'abo_mel' => 'required',/*|string|mail|max:255|unique:users',*/
             'abo_motpasse' => 'required',/*|string|min:6|confirmed',*/
         ]);
     }

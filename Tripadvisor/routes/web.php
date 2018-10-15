@@ -15,14 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
 Route::get("/settings", "SettingsController@index");
+
+Route::get("/hotel/search", "HotelController@search");
+Route::post("/hotel/searchResult", "HotelController@searchResult");
+Route::get("/hotel/list", "HotelController@list");
+Route::get("/hotel/displayHotel", "HotelController@displayHotel");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
