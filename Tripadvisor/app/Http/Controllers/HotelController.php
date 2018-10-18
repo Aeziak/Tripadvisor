@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Hotel;
 use App\Avis;
+use App\reponseQuestion;
+use App\QuestionHotel;
+use App\Personne;
 
 class HotelController extends Controller
 {
@@ -17,7 +20,11 @@ class HotelController extends Controller
 		$allHotels = Hotel::All();
 		$hotels = array();
 		foreach($allHotels as $hotel){
-			if(levenshtein($hotel->hot_ville, $request->input("ville")) <= 3){
+			if($request->input("ville") != ""){
+				if(levenshtein($hotel->hot_ville, $request->input("ville")) <= 3){
+					$hotels[] = $hotel;
+				}
+			}else{
 				$hotels[] = $hotel;
 			}
 		}
@@ -31,10 +38,14 @@ class HotelController extends Controller
 	}
 
 	public function displayHotel(){
+
 		$allHotels = Hotel::All();
 		$hotels = array();
 		$allAvis = Avis::All();
 		$aviss = array();
+		$reponses = reponseQuestion::All();
+		$questions = QuestionHotel::All();
+		$personnes = Personne::All();
 		foreach ($allHotels as $hotel) {
 			if($hotel->hot_id == $_GET["hot_id"]){
 				$hotels[] = $hotel;
@@ -48,6 +59,6 @@ class HotelController extends Controller
 			}
 		}
 
-		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss]);
+		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss, "questions" => $questions,"reponses" => $reponses, "personnes" => $personnes]);
 	}
 }

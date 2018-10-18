@@ -21,6 +21,9 @@ Route::get("/hotel/search", "HotelController@search");
 Route::post("/hotel/searchResult", "HotelController@searchResult");
 Route::get("/hotel/list", "HotelController@list");
 Route::get("/hotel/displayHotel", "HotelController@displayHotel");
+Route::get("/hotel/login","LoginHotelController@login");
+Route::post("/hotel/loginconfirm", "LoginHotelController@checklogin");
+Route::get("/hotel/displaypersonne","AbonneController@index");
 
 Auth::routes();
 
