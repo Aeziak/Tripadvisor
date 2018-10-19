@@ -88,24 +88,11 @@
 		</p>
 
 		<div id="allanswer">
-			@foreach($reponses as $reponse)
-				@if($reponse->avi_id == $avis->avi_id)
-					@foreach($questions as $question)
-						@if($question->qho_id == $reponse->qho_id)
-							<div id="displayquestions">
-								<div class="separator">
-									<div class="separatortriangle"></div>
-								</div>
-								<br/><br/>
-								<div class="displayanswer">
-									<p>{{ $question->qho_question }}</p>
-									<p>{{ $reponse->rqh_reponse }}</p>
-								</div>
-							</div>
-						@endif
-					@endforeach
-				@endif
-			@endforeach
+		<span class="date">: {{ $avis->avi_date }}</span><br/>{{ $avis->avi_noteglobale }} : {{ $avis->avi_detail }}</p>
+		<!--<div id="allanswer">
+
 		</div>
 	@endforeach	
+		</div>-->
+	@endforeach
 @endsection

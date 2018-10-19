@@ -48,14 +48,25 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ url('/hotel/register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/hotel/login/') }}">{{ __('Login') }}</a>
-                            </li>
+                            <?php 
+                                if(!(empty($_COOKIE["username"]) && empty($_COOKIE["password"])) && !($_COOKIE["username"] == null || $_COOKIE["password"] == null)){
+                                    echo $_COOKIE["username"]." : ".$_COOKIE["password"];
+                                    ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/hotel/logout') }}">{{ __('Logout') }}</a>
+                                    </li>
+                                <?php
+                                }else{
+                                    ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/hotel/register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/hotel/login/') }}">{{ __('Login') }}</a>
+                                    </li>
+                                    <?php
+                                }
+		                    ?>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
