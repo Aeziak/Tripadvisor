@@ -58,6 +58,13 @@
 			</select>
 			<input type="submit" value="Choisir">
 		</form>
+
+		@foreach($photos as $photo)
+			@if($hotel->hot_id == $photo->hot_id)
+				<img src="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/{{ $photo->pho_url}}" class="photoHotel">
+			@endif
+		@endforeach
+
 	@endforeach
 
 	@foreach($aviss as $avis)
@@ -67,7 +74,19 @@
 				<a href="{{ url('/hotel/displaypersonne') }}?abo_id={{ $personne->abo_id }}"><span class="personne">{{ $personne->abo_prenom }}</span></a>
 			@endif
 		@endforeach
-		<span class="date">: {{ $avis->avi_date }}</span><br/>{{ $avis->avi_noteglobale }} : {{ $avis->avi_detail }}</p>
+		<span class="date">: {{ $avis->avi_date }}</span><br/>{{ $avis->avi_noteglobale }} : {{ $avis->avi_detail }}
+
+		<!-- @foreach($photos as $photo)
+			@if($avis->avi_id == $photo->avi_id)
+					<div class="divPhotoAvis">
+						<img src="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/{{ $photo->pho_url}}" class="photoAvis">
+					</div>
+			@endif
+		@endforeach
+		-->
+
+		</p>
+
 		<div id="allanswer">
 			@foreach($reponses as $reponse)
 				@if($reponse->avi_id == $avis->avi_id)
@@ -88,6 +107,5 @@
 				@endif
 			@endforeach
 		</div>
-	@endforeach
-		
+	@endforeach	
 @endsection

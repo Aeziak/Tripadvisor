@@ -11,11 +11,13 @@ class AbonneController extends Controller
     public function index() {
         $allAvis = Avis::All();
         $aviss = array();
+
         foreach($allAvis as $avis){
             if($avis->abo_id == $_GET["abo_id"]){
                 $aviss[] = $avis;
             }
         }
-        return view("hotels-abonne", [ "personnes" => Personne::All(), "avis" => $aviss ]);
+
+        return view("hotels-abonne", [ "personnes" => Personne::All(), "avis" => $aviss]);
     }
 }
