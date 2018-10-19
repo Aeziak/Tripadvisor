@@ -25,6 +25,7 @@ Route::get("/hotel/login","LoginHotelController@login");
 Route::post("/hotel/loginconfirm", "LoginHotelController@checklogin");
 Route::get("/hotel/logout","LoginHotelController@logout");
 Route::get("/hotel/displaypersonne","AbonneController@index");
+Route::get("/hotel/register","RegisterController@index");
 
 Auth::routes();
 

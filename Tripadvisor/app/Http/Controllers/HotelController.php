@@ -48,7 +48,6 @@ class HotelController extends Controller
 		$questions = QuestionHotel::All();
 		$personnes = Personne::All();
 		$allPhotos = Photo::All();
-		$photos = array();
 
 		foreach ($allHotels as $hotel) {
 			if($hotel->hot_id == $_GET["hot_id"]){
@@ -57,20 +56,16 @@ class HotelController extends Controller
 		}
 		foreach ($hotels as $hotel) {
 			foreach ($allAvis as $avis) {
-				if($avis->hot_id == $hotel->hot_id && $avis->avi_langue == $_GET["lang"]){
+				if($_GET["lang"] == "English" || $_GET["lang"] == "French"){
+					if($avis->hot_id == $hotel->hot_id && $avis->avi_langue == $_GET["lang"]){
+						$aviss[] = $avis;
+					}
+				}else{
 					$aviss[] = $avis;
 				}
 			}
 		}
 
-		foreach ($hotels as $hotel) {
-			foreach ($allPhotos as $photo) {
-				if($photo->hot_id == $hotel->hot_id){
-					$photos[] = $photo;
-				}
-			}
-		}
-
-		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss, "questions" => $questions,"reponses" => $reponses, "personnes" => $personnes, "photos" => $photos]);
+		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss, "questions" => $questions,"reponses" => $reponses, "personnes" => $personnes, "photos" => $allPhotos]);
 	}
 }
