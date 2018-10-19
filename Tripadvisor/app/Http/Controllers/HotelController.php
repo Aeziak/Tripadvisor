@@ -61,7 +61,9 @@ class HotelController extends Controller
 						$aviss[] = $avis;
 					}
 				}else{
-					$aviss[] = $avis;
+					if($avis->hot_id == $hotel->hot_id){
+						$aviss[] = $avis;
+					}
 				}
 			}
 		}
