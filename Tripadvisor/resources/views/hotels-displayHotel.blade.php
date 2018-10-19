@@ -48,7 +48,8 @@
 		<form method="get" action="{{url('/hotel/displayHotel')}}">
 		<input type="hidden" name="hot_id" value="{{ $hotel->hot_id }}">
 			<select name="lang">
-			 	<option name="lang" value="French" selected>French</option> 
+				<option name="lang" value="All" selected>All</option> 
+			 	<option name="lang" value="French">French</option> 
 			 	<option name="lang" value="English">English</option> 	
 			</select>
 			<select name="typetri">
@@ -64,35 +65,28 @@
 				<img src="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/{{ $photo->pho_url}}" class="photoHotel">
 			@endif
 		@endforeach
-
 	@endforeach
 
 	@foreach($aviss as $avis)
-		<p class="comment">
+		<div class="comment">
 		@foreach($personnes as $personne)
 			@if($avis->abo_id == $personne->abo_id)
 				<a href="{{ url('/hotel/displaypersonne') }}?abo_id={{ $personne->abo_id }}"><span class="personne">{{ $personne->abo_prenom }}</span></a>
 			@endif
 		@endforeach
 		<span class="date">: {{ $avis->avi_date }}</span><br/>{{ $avis->avi_noteglobale }} : {{ $avis->avi_detail }}
-
-		<!-- @foreach($photos as $photo)
+		@foreach($photos as $photo)
 			@if($avis->avi_id == $photo->avi_id)
 					<div class="divPhotoAvis">
 						<img src="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/{{ $photo->pho_url}}" class="photoAvis">
 					</div>
 			@endif
 		@endforeach
-		-->
+		</div>
 
-		</p>
-
-		<div id="allanswer">
-		<span class="date">: {{ $avis->avi_date }}</span><br/>{{ $avis->avi_noteglobale }} : {{ $avis->avi_detail }}</p>
 		<!--<div id="allanswer">
 
-		</div>
-	@endforeach	
+		</div>	
 		</div>-->
-	@endforeach
-@endsection
+		@endforeach
+	@endsection
