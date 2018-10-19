@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://infobanana.iut-acy.local/~garciaju/Tripadvisor/Tripadvisor/public/hotel/search">Rechercher un Hotel</a>
-                    <a href="http://infobanana.iut-acy.local/~garciaju/Tripadvisor/Tripadvisor/public/hotel/list">Liste des Hotels</a>
+                    <a href="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/hotel/search">Rechercher un Hotel</a>
+                    <a href="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/hotel/list">Liste des Hotels</a>
                 </div>
             </div>
         </div>

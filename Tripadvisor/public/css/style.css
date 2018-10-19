@@ -103,3 +103,9 @@ a:visited{
     from {background: rgb(240, 240, 240);}
     to {background: rgb(220, 220, 220);}
 }
+
+.photoHotel {
+	height : 30vh;
+	width : auto;
+	padding : 5vh;
+}

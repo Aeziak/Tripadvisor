@@ -8,6 +8,7 @@ use App\Avis;
 use App\reponseQuestion;
 use App\QuestionHotel;
 use App\Personne;
+use App\Photo;
 
 class HotelController extends Controller
 {
@@ -46,6 +47,9 @@ class HotelController extends Controller
 		$reponses = reponseQuestion::All();
 		$questions = QuestionHotel::All();
 		$personnes = Personne::All();
+		$allPhotos = Photo::All();
+		$photos = array();
+
 		foreach ($allHotels as $hotel) {
 			if($hotel->hot_id == $_GET["hot_id"]){
 				$hotels[] = $hotel;
@@ -59,6 +63,14 @@ class HotelController extends Controller
 			}
 		}
 
-		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss, "questions" => $questions,"reponses" => $reponses, "personnes" => $personnes]);
+		foreach ($hotels as $hotel) {
+			foreach ($allPhotos as $photo) {
+				if($photo->hot_id == $hotel->hot_id){
+					$photos[] = $photo;
+				}
+			}
+		}
+
+		return view ("hotels-displayHotel", ["hotels" => $hotels, "aviss" => $aviss, "questions" => $questions,"reponses" => $reponses, "personnes" => $personnes, "photos" => $photos]);
 	}
 }
