@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/hotel/search">Rechercher un Hotel</a>
-                    <a href="http://infobanana.iut-acy.local/~vebervi/Tripadvisor/public/hotel/list">Liste des Hotels</a>
+                    <a href="{{ url('/hotel/search') }}">Rechercher un Hotel</a>
+                    <a href="{{ url('/hotel/list') }}">Liste des Hotels</a>
                 </div>
             </div>
         </div>

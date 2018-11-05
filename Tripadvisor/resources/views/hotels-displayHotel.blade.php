@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-<!--@section('title', 'Films')-->
-
 @section('content')
 	<h1>Liste des hotels</h1>
 
@@ -44,9 +42,38 @@
 	?>
 
 	@foreach($hotels as $hotel)
+		@if($hotel->htr_id == $isHotelier)
+			<form method="POST" action="{{ url('/hotel/editHotel') }}">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" >
+				<input type="hidden" name="hot_id" value="<?php echo $_GET["hot_id"]; ?>"/>
+				<input type="hidden" name="hot_nom" value="{{ $hotel->hot_nom }}"/>
+				<input type="hidden" name="prx_id" value="{{ $hotel->prx_id }}"/>
+				<input type="submit" value="Edit Hotel"/>
+			</form>
+		@endif
+		<?php
+		if(!empty($_COOKIE["aboid"])){
+			$isFav = false;
+			foreach($favoris as $fav){
+				if($fav->abo_id == $_COOKIE["aboid"] && $fav->hot_id == $_GET["hot_id"]){
+					$isFav = true;
+				}
+			}
+			if($isFav == true){
+		?>
+			<a href="{{ url('/hotel/addFavoris/') }}?hot_id={{ $hotel->hot_id }}&lang=All&addFav=false"><h3>Retirer des favoris</h3></a>
+		<?php
+			}else{
+		?>
+			<a href="{{ url('/hotel/addFavoris/') }}?hot_id={{ $hotel->hot_id }}&lang=All&addFav=true"><h3>Ajouter aux favoris</h3></a>
+		<?php
+			}
+		}
+		?>
 		<p>{{ $hotel->hot_nom }}<br/>{{ $hotel->hot_ville }}</p>
 		<form method="get" action="{{url('/hotel/displayHotel')}}">
-		<input type="hidden" name="hot_id" value="{{ $hotel->hot_id }}">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" >
+			<input type="hidden" name="hot_id" value="{{ $hotel->hot_id }}">
 			<select name="lang">
 				<option name="lang" value="All" selected>All</option> 
 			 	<option name="lang" value="French">French</option> 
@@ -66,6 +93,50 @@
 			@endif
 		@endforeach
 	@endforeach
+
+	<?php
+		if(!empty($_COOKIE["isLogged"]) && $_COOKIE["isLogged"] == true && empty($_COOKIE["htrid"])){
+	?>
+			<form method="POST" action="{{ url('/hotel/addAvis') }}">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" >
+				<input type="hidden" name="hot_id" value="<?php echo $_GET['hot_id']; ?>"/>
+				<input type="hidden" name="lang" value="<?php echo $_GET['lang']; ?>"/>
+				<p>
+					<label for="titreavis">*Titre avis :</label>
+				</p>
+				<p>
+					<input type="text" name="titreavis"/>
+				<p>
+				<p>
+					<label for="avistext">*Votre avis :</label>
+				</p>
+				<p>
+					<textarea name="avistext"></textarea>
+				<p>
+				<p>
+					<select name="note">
+						<option name="note" value="-" selected>-</option> 
+						<option name="note" value="0">0</option> 
+						<option name="note" value="1">1</option> 	
+						<option name="note" value="2">2</option> 
+						<option name="note" value="3">3</option> 	
+						<option name="note" value="4">4</option> 
+						<option name="note" value="5">5</option> 	
+					</select>
+				</p>
+				<p>
+					<label for="conseilavis">Conseil (optionnel) :</label>
+				</p>
+				<p>
+					<input type="text" name="conseilavis"/>
+				<p>
+				<p>
+					<input type="submit" value="Remettre"/>
+				</p>
+			</form>
+	<?php
+		}
+	?>
 
 	@foreach($aviss as $avis)
 		<div class="comment">
