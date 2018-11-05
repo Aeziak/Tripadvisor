@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-
 @section('content')
 	<h1>Connexion</h1>
-	<form method="post" action="{{ url("/hotel/loginconfirm") }}">
+	<form method="post" action="{{ url("/hotel/loginconfirmHotelier") }}">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" >
 			<p>
 				<label for="username">Username</label>

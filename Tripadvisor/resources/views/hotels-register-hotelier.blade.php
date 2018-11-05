@@ -1,20 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-	<h1>Rechercher</h1>
-		<form method="post" action="{{ url("/hotel/confirmRegister") }}">
+	<h1>Inscription Hotelier</h1>
+		<form method="post" action="{{ url("/hotel/confirmRegisterHotelier") }}">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" >
-			<p>
-				<label for="username">Username</label>
-				<input type="text" name="username" required>
+        <p>
+				<label for="email">Email</label>
+				<input type="mail" name="email">
 			</p>
             <p>
 				<label for="password">password</label>
 				<input type="password" name="password" required>
-			</p>
-            <p>
-				<label for="email">Email</label>
-				<input type="mail" name="email">
 			</p>
             <p>
 				<label for="prenom">Prenom</label>
@@ -27,18 +23,6 @@
             <p>
 				<label for="adresse">Adresse</label>
 				<input type="text" name="adresse">
-			</p>
-            <p>
-				<label for="pays">Pays</label>
-				<input type="text" name="pays">
-			</p>
-            <p>
-				<label for="cp">Code Postal</label>
-				<input type="text" name="cp">
-			</p>
-            <p>
-				<label for="tel">Téléphone</label>
-				<input type="text" name="tel">
 			</p>
 			<p>
 				<label></label>

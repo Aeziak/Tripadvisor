@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
-<!--@section('title', 'Films')-->
-
 @section('content')
 	<h1>Liste des hotels</h1>
 
 	@foreach($hotels as $hotel)
-		<a class="hotelresult" href="http://infobanana.iut-acy.local/~garciaju/Tripadvisor/Tripadvisor/public/hotel/displayHotel?hot_id={{ $hotel->hot_id }}&lang=All"><p>{{ $hotel->hot_nom }}<br/>{{ $hotel->hot_ville }}</p></a>
+	<a class="hotelresult" href="{{ url('hotel/displayHotel/') }}?hot_id={{ $hotel->hot_id }}&lang=All"><p>{{ $hotel->hot_nom }} : {{ $hotel->hot_ville }}<br/>{{ $hotel->cat_nbetoiles }}/5<br/>
+		@foreach($prix as $prx) 
+			@if($prx->prx_id == $hotel->prx_id)
+				{{ $prx->prx_fourchette }}
+			@endif
+		@endforeach</p></a>
 	@endforeach
 		
 @endsection

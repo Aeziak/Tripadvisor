@@ -50,14 +50,35 @@
                         @guest
                             <?php 
                                 if(!(empty($_COOKIE["username"]) && empty($_COOKIE["password"])) && !($_COOKIE["username"] == null || $_COOKIE["password"] == null)){
-                                    echo $_COOKIE["username"]." : ".$_COOKIE["password"];
+                                    setcookie("isLogged", true, time()+3600);
                                     ?>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/hotel/logout') }}">{{ __('Logout') }}</a>
                                     </li>
                                 <?php
+                                    if(!empty($_COOKIE['aboid'])){
+                                ?>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="{{ url('hotel/displaypersonne/') }}?abo_id=<?php echo $_COOKIE['aboid']; ?>">Mon Compte</a>
+                                        </li>
+                                <?php
+                                    }
+                                    if(!empty($_COOKIE['htrid'])){
+                                ?>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="{{ url('hotel/displaypersonne/') }}?htr_id=<?php echo $_COOKIE['htrid']; ?>">Mon Compte</a>
+                                        </li>
+                                <?php
+                                    }
                                 }else{
                                     ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/hotel/registerHotelier/') }}">{{ __('Register Hotelier') }}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/hotel/loginHotelier/') }}">{{ __('Login Hotelier') }}</a>
+                                    </li>
+                                    <span class="nav-item" style="color: #ffffff;"> | </span>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/hotel/register') }}">{{ __('Register') }}</a>
                                     </li>
